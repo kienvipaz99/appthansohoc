@@ -29,6 +29,25 @@ if (!function_exists('locChuCai')) {
             return $tong;
         }
     }
+    if (!function_exists('tinhtong1')) {
+        function tinhtong1($chuoiLoc, $anhXaChuCaiVaSo)
+        {
+            $tong = 0;
+            foreach (str_split($chuoiLoc) as $chuoi) {
+                if (array_key_exists($chuoi, $anhXaChuCaiVaSo)) {
+                    $tong += intval($anhXaChuCaiVaSo[$chuoi]);
+                }
+            }
+            while ($tong >= 10) {
+                $chuoiTong = strval($tong);
+                $tong = 0;
+                foreach (str_split($chuoiTong) as $chuSo) {
+                    $tong += intval($chuSo);
+                }
+            }
+            return $tong;
+        }
+    }
     if (!function_exists('phuam')) {
         function phuam($chuoi)
         {

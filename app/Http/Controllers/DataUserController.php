@@ -54,6 +54,13 @@ class DataUserController extends Controller
         $tt3 = abs($tt1 - $tt2);
         $tt4 = abs(tongso($thang) - tongso($nam));
 
+        $tenChuCaiDau = "";
+        $mang_tu = explode('-', $tenChuanHoa);
+        foreach ($mang_tu as $tu) {
+            $chu_cai_dau = substr($tu, 0, 1);
+            $tenChuCaiDau .= $chu_cai_dau;
+        }
+        $canbang = tinhtong1($tenChuCaiDau, $anhXaChuCaiVaSo);
         $data = [
             'name' => $hoTen,
             'birth_day' => $ngaySinh,
@@ -82,7 +89,8 @@ class DataUserController extends Controller
                 'tt2' => $tt2,
                 'tt3' => $tt3,
                 'tt4' => $tt4
-            ]
+            ],
+            'can_bang' => $canbang
         ];
 
         return response()->json($data);

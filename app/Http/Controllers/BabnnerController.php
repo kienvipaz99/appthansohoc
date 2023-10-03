@@ -27,7 +27,8 @@ class BabnnerController extends Controller
 
         $validatedData =  Validator::make($input, [
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'name' => 'required'
+            'name' => 'required',
+            'link' => 'required|url',
         ]);
         if ($validatedData->fails()) {
             $arr = [
@@ -43,7 +44,8 @@ class BabnnerController extends Controller
             $imageUrl = asset(Storage::url($image_path));
             $data = Banner::create([
                 'image' => $imageUrl,
-                'name' => $input['name']
+                'name' => $input['name'],
+                'link' => $input['link'],
             ]);
 
             session()->flash('success', 'Ảnh đã được tải lên thành công');
@@ -68,6 +70,7 @@ class BabnnerController extends Controller
         $validatedData = Validator::make($input, [
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'name' => 'required',
+            'link' => 'required|url',
         ]);
 
         if ($validatedData->fails()) {
@@ -88,6 +91,8 @@ class BabnnerController extends Controller
         }
 
         $banner->name = $input['name'];
+        $banner->link = $input['link'];
+
         $banner->save();
 
         $arr = [
